@@ -1,0 +1,9 @@
+def FileExists
+        fileToTest = "C:/jagan/sample.html"
+        puts 'Checking for file: ' + fileToTest
+        if File.exist?(fileToTest)
+                puts 'file is there'
+        else
+                puts 'file not found'
+        end
+end

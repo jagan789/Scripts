@@ -1,0 +1,22 @@
+################################################################
+####Setup Licapa bases on the box types:DCT 2000,DCT 2500 and ASTB ####
+################################################################
+bp 'exit'
+bp 'power'
+p 1
+bp 'ok'
+p 1
+if image_compare_rgb_difference 'DCT2000_diagscreen.icf', 2
+                                bp 'power'
+								p 2
+                                licpa 8,1
+elsif image_compare_rgb_difference 'DCT2500_diagscreen.icf', 2
+								bp 'power'
+								p 5
+                                licpa 8,1
+                                p 2
+else 
+								bp 'power'
+								p 5
+								licpa 25,35
+end

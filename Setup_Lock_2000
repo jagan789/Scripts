@@ -1,0 +1,150 @@
+#icbw 'ByPassLock_Symbol.icf', '<<<>>>'
+licpa 5,-2
+trl "off"
+bp 'exit'
+p 2
+bp 'menu'
+p 2
+bp 'menu'
+p 2
+bp 'arrowright'
+p 2
+bp 'arrowup'
+p 2
+
+
+# FInding Parent Control Menu Option
+until image_compare_rgb_difference 'ParentC_Menu.icf', 10
+		
+		bp 'arrowdown'
+		p 2
+end 
+
+#Going Thru Parent Control Menu
+
+if image_compare_rgb_difference 'ParentC_Menu.icf', 10
+              
+             bp 'ok'
+	     p 2
+
+#Section 1:    Making PIN Entry mismatch
+
+     if image_compare_rgb_difference 'PIN_Incorrect_Overlay.icf', 10
+         ta ("Incorrect PIN overlay is displayed") {}
+     else
+		if image_compare_rgb_difference 'TurnOnLocks.icf', 10
+			p 2
+			bp 'arrowup'
+			p 2
+			bp 'ok'
+			p 2
+		    	bp '0,0,0,0'
+		#elsif image_compare_rgb_difference 'LockOverlay.icf', 10
+			p 2
+		    #   bp '0,0,0,0'
+                elsif (image_compare_rgb_difference 'LockOverlay.icf', 10)||(image_compare_rgb_difference 'Create_Locks_PIN.icf', 10)
+                     	  p 2
+		      	 bp '0,0,0,0'
+                            if image_compare_rgb_difference 'Confirm_New_PIN.icf', 10
+                     	        p 2
+			        bp '1,1,1,1'
+                                  if image_compare_rgb_difference 'Incorrect_PIN_Entry.icf', 10
+                                        ta ("Mismatch overlay is displayed") {}
+                                  else
+					ta ("Mismatch overlay is not displayed") {}
+                                  end
+                      	       p 2
+                            end
+		end
+
+    end
+
+#Section 2:    Setup Correct PIN
+
+   if image_compare_rgb_difference 'PIN_Incorrect_Overlay.icf', 10
+         ta ("Incorrect PIN overlay is displayed") {}
+     else
+		if image_compare_rgb_difference 'TurnOnLocks.icf', 10
+			p 2
+			bp 'arrowup'
+			p 2
+			bp 'ok'
+			p 2
+		    	bp '0,0,0,0'
+		#elsif image_compare_rgb_difference 'LockOverlay.icf', 10
+			p 2
+		    #   bp '0,0,0,0'
+                elsif (image_compare_rgb_difference 'LockOverlay.icf', 10)||(image_compare_rgb_difference 'Create_Locks_PIN.icf', 10)
+
+                     	  p 2
+		      	 bp '0,0,0'
+                         bp 'enter'
+                        if (image_compare_rgb_difference 'LockOverlay.icf', 10)||(image_compare_rgb_difference 'Create_Locks_PIN.icf', 10)
+                                 ta ("3 Digit PIN Entry is not valid") {}
+                                 p 2
+			         bp '0,0,0,0'
+                      	         p 2
+                            if image_compare_rgb_difference 'Confirm_New_PIN.icf', 10
+                     	        p 2
+			        bp '0,0,0,0'
+                      	       p 2
+                            end
+                        end
+		end
+
+    end
+
+end
+
+
+
+#Section 3:    Making PIN Inactive
+
+bp 'exit'
+p 2
+bp 'menu'
+p 2
+bp 'menu'
+p 2
+bp 'arrowright'
+p 2
+bp 'arrowup'
+p 2
+
+# FInding Parent Control Menu Option
+until image_compare_rgb_difference 'ParentC_Menu.icf', 10
+		bp 'arrowdown'
+		p 2
+end
+
+#Make Lock Option InActive
+if image_compare_rgb_difference 'ParentC_Menu.icf', 10
+             bp 'ok'
+	     p 2
+                         if image_compare_rgb_difference 'PIN_Incorrect_Overlay.icf', 10
+				ta ("Incorrect PIN overlay is displayed") {}
+                         else
+
+				for i in (1..5) do
+   				 bp '1,2,3,4'
+	    			 p 2
+                                 x=i
+                                      if ( x==3 )&& (image_compare_rgb_difference 'LockOverlay.icf', 10)
+                                          ta ("Lock Overlay is displayed Still upon 3 wrong attempts") {}
+                                       elsif ( x==5) && (image_compare_rgb_difference 'PIN_Incorrect_Overlay.icf', 10)
+					  ta ("Incorrect PIN overlay is displayed") {}
+                                      end
+				end
+                          
+                         end
+
+end
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+def  log_file(testcase,title,statusp,statusf)
+filename="c:\\jagan\\Iguide1.html"
+fileHtml = File.new("c:\\jagan\\Iguide1.html", "w+")
+fileHtml.puts "<HTML><BODY BGCOLOR='white'>"
+fileHtml.puts "<CENTER>TEST RESULTS</CENTER><br>"
+fileHtml.puts "<TABLE BORDER = '3' ALIGN='center'>"
+fileHtml.puts "<TR><TD> <FONT COLOR='GRAY'>{testcase}</FONT></TD>"
+fileHtml.puts "<TD><FONT COLOR='GRAY'>{title}</FONT></TD>"
+fileHtml.puts "<TD><FONT COLOR='green'>{statusp}</FONT></TD>"
+fileHtml.puts "<TD><FONT COLOR='RED'>{statusf}</FONT></TD></TR>"
+fileHtml.puts "</TABLE>"
+fileHtml.puts "</BODY></HTML>"
+fileHtml.close()
+end
