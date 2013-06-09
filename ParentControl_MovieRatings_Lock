@@ -1,0 +1,331 @@
+icbw 'LockOverlay.icf', '<<<>>>'
+################################################################
+####Setup Licapa bases on the box types:DCT 2000,DCT 2500 and ASTB ####
+################################################################
+bp 'exit'
+bp 'power'
+p 1
+bp 'ok'
+p 10
+if image_compare_rgb_difference 'DCT2000_diagscreen.icf', 2
+                                bp 'power'
+								p 2
+                                licpa 8,1
+elsif image_compare_rgb_difference 'DCT2500_diagscreen.icf', 2
+								bp 'power'
+								p 5
+                                licpa 8,1
+                                p 2
+else 
+								bp 'power'
+								p 5
+								licpa 1,35
+end
+
+
+#Remove Locks First
+
+bp 'exit'
+p 2
+bp 'menu'
+p 2
+bp 'menu'
+p 2
+bp 'arrowright'
+p 2
+bp 'arrowup'
+p 2
+
+# FInding Parent Control Menu Option
+until image_compare_rgb_difference 'ParentC_Menu.icf', 10
+		bp 'arrowdown'
+		p 2
+end
+
+#Going Thru Parent Control Menu
+
+if image_compare_rgb_difference 'ParentC_Menu.icf', 10
+             bp 'ok'
+	     p 2
+		if image_compare_rgb_difference 'TurnOnLocks.icf', 10
+			p 2
+			bp 'arrowup'
+			p 2
+			bp 'ok'
+			p 2
+		    	#bp '0,0,0,0'
+		else
+                       bp '0,0,0,0'
+			p 2
+		       bp '0,0,0,0'
+	     p 2
+		end
+
+#Navigate to Remove locks
+
+	until image_compare_rgb_difference 'ParentControl_Masterlocks_Menu.icf', 10
+		bp 'arrowright'
+		p 2
+		bp 'arrowdown'
+		p 2
+	end
+
+	if image_compare_rgb_difference 'ParentControl_Masterlocks_Menu.icf', 10
+		bp 'ok'
+	        p 2
+		bp 'arrowdown'
+		p 2
+		bp 'arrowright'
+		p 2
+		bp 'arrowup'
+		p 2
+		bp 'ok'
+		p 2
+	end
+
+
+p 2
+bp'1'
+p 8
+
+
+bp'1,5,3'
+p 5
+if image_compare_rgb_difference 'NoLock_Symbol.icf', 3
+	
+	end
+bp 'last'
+
+
+bp'2,1'
+p 5
+if image_compare_rgb_difference 'NoLock_Symbol.icf', 3
+	
+	end
+bp 'last'
+
+bp'1,5,6'
+p 5
+if image_compare_rgb_difference 'NoLock_Symbol.icf', 3
+	
+	end
+bp 'last'
+
+bp'1,4,0'
+p 5
+if image_compare_rgb_difference 'NoLock_Symbol.icf', 3
+	
+	end
+bp 'last'
+
+bp'8,9,9'
+p 5
+if image_compare_rgb_difference 'NoLock_Symbol.icf', 3
+	
+	end
+bp 'last'
+   
+
+end
+
+
+
+
+#Setup Locks
+
+bp 'exit'
+p 2
+bp 'menu'
+p 2
+bp 'menu'
+p 2
+bp 'arrowright'
+p 2
+bp 'arrowup'
+p 2
+
+# FInding Parent Control Menu Option
+until image_compare_rgb_difference 'ParentC_Menu.icf', 10
+		bp 'arrowdown'
+		p 2
+end
+
+#Going Thru Parent Control Menu
+if image_compare_rgb_difference 'ParentC_Menu.icf', 10
+             bp 'ok'
+	     p 2
+	     bp '0,0,0,0'
+	     p 2
+
+
+#Navigate to Remove locks
+
+	
+	#Navigate thru TV Rating Locks
+	until image_compare_rgb_difference 'ParentC_TVRatingLocks_Menu.icf', 10
+		bp 'arrowdown'
+		p 2
+	end
+	
+        if image_compare_rgb_difference 'ParentC_TVRatingLocks_Menu.icf', 10
+		bp 'ok'
+	        p 2
+         	bp 'ok'
+		p 2
+	end
+p 2
+bp'1'
+p 8
+
+
+bp'1,5,3'
+p 5
+if image_compare_rgb_difference 'LockOverlay.icf', 10
+	
+	end
+bp 'last'
+
+
+bp'2,1'
+p 5
+if image_compare_rgb_difference 'LockOverlay.icf', 10
+	
+	end
+bp 'last'
+
+bp'1,5,6'
+p 5
+if image_compare_rgb_difference 'LockOverlay.icf', 10
+	
+	end
+bp 'last'
+
+bp'1,4,0'
+p 5
+if image_compare_rgb_difference 'LockOverlay.icf', 10
+	
+	end
+bp 'last'
+
+bp'8,9,9'
+p 5
+if image_compare_rgb_difference 'LockOverlay.icf', 10
+	
+	end
+bp 'last'
+   
+
+
+end
+
+
+p 2
+bp 'exit'
+p 2
+
+
+
+
+
+
+
+
+
+
+#ByPass Locks
+
+bp 'exit'
+p 2
+bp 'menu'
+p 2
+bp 'menu'
+p 2
+bp 'arrowright'
+p 2
+bp 'arrowup'
+p 2
+
+# FInding Parent Control Menu Option
+until image_compare_rgb_difference 'ParentC_Menu.icf', 10
+		bp 'arrowdown'
+		p 2
+end
+
+#Going Thru Parental Control Menu
+if image_compare_rgb_difference 'ParentC_Menu.icf', 10
+             bp 'ok'
+	     p 2
+	     bp '0,0,0,0'
+	     p 2
+
+
+#Navigate to Remove locks
+
+	until image_compare_rgb_difference 'ParentControl_Masterlocks_Menu.icf', 10
+		bp 'arrowright'
+		p 2
+		bp 'arrowdown'
+		p 2
+	end
+
+	if image_compare_rgb_difference 'ParentControl_Masterlocks_Menu.icf', 10
+		bp 'ok'
+	        p 2
+		bp 'arrowright'
+		p 2
+		bp 'arrowup'
+		p 2
+		bp 'ok'
+		p 2
+	end
+
+p 8
+
+
+
+p 2
+bp'1'
+p 8
+
+
+bp'1,5,3'
+p 5
+if image_compare_rgb_difference 'ByPassLock_Symbol.icf', 10
+	
+	end
+bp 'last'
+
+
+bp'2,1'
+p 5
+if image_compare_rgb_difference 'ByPassLock_Symbol.icf', 10
+	
+	end
+bp 'last'
+
+bp'1,5,6'
+p 5
+if image_compare_rgb_difference 'ByPassLock_Symbol.icf', 10
+	
+	end
+bp 'last'
+
+bp'1,4,0'
+p 5
+if image_compare_rgb_difference 'ByPassLock_Symbol.icf', 10
+	
+	end
+bp 'last'
+
+bp'8,9,9'
+p 5
+if image_compare_rgb_difference 'ByPassLock_Symbol.icf', 10
+	
+	end
+bp 'last'
+   
+
+end
+
+
+
